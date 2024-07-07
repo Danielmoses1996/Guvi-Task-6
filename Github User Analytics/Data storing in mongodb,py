@@ -1,0 +1,31 @@
+# MongoDB connection and insertion example
+from pymongo import MongoClient
+
+# Connect to MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+db = client['github_data']
+users_collection = db['users']
+
+# Example user data (fetched from GitHub API)
+user_data = {
+    'login': 'octocat',
+    'name': 'The Octocat',
+    'bio': 'Building software for the world.',
+    'public_repos': 10,
+    'followers': 1000,
+    'following': 500,
+    'created_at': '2008-01-14T04:33:35Z',
+    'updated_at': '2022-06-14T12:33:35Z',
+    'avatar_url': 'https://github.com/octocat.png',
+    'html_url': 'https://github.com/octocat',
+    'total_commits': 3200,
+    'languages': {'Python': 50000, 'JavaScript': 30000},
+    'starred_repos': ['https://github.com/user/repo1', 'https://github.com/user/repo2'],
+    'subscriptions': ['https://github.com/user/repo3', 'https://github.com/user/repo4'],
+    'organizations': ['org1', 'org2'],
+    'followers_list': ['user1', 'user2'],
+    'following_list': ['user3', 'user4']
+}
+
+# Insert data into MongoDB
+users_collection.insert_one(user_data)
